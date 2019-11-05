@@ -1,0 +1,7 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/anirudh246/NearestPlayerCompass
+branches:
+- master
+projects:
+  NearestPlayerCompass:
+    path: ""
+...
