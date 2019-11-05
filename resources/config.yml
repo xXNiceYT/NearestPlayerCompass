@@ -1,1 +1,9 @@
+# NearestPlayerCompass Configuration File
+
+# Set needle to nearest player
+# (If set true, compass needle will set to nearest player's position)
+
+set-needle-to-nearest: true
+
+# ----------------------------------------------------------------------------
 
