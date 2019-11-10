@@ -10,7 +10,6 @@ use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\SetSpawnPositionPacket;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-
 class NearestPlayerCompass extends PluginBase implements Listener{
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -22,13 +21,15 @@ class NearestPlayerCompass extends PluginBase implements Listener{
     public function onItemHeld(PlayerItemHeldEvent $event){
         $player = $event->getPlayer();
         if($event->getItem()->getId() === ItemIds::COMPASS){
-
+            $onlyOperator = (bool) $this->config->get('apply-only-permitted-player');
+            if(($onlyOperator && $player->hasPermission('nearestplayercompass.allow.permission')) || $onlyOperator === false){
                 $setNeedle = (bool) $this->config->get('set-needle-to-nearest');
                 $nearPlayer = $this->calculateNearestPlayer($player);
                 if($nearPlayer instanceof Player){
                     $myVector = $player->asVector3();
                     $nearVector = $nearPlayer->asVector3();
                     $message = \str_replace(['@pn', '@dn', '@tn', '@d'] ,[$nearPlayer->getName(), $nearPlayer->getDisplayName(), $nearPlayer->getNameTag(), (int) $myVector->distance($nearVector)], $this->config->get('message-found-nearest-player'));
+                    $this->sendEachType($player, $message);
                     if($setNeedle) $this->setSpawnPositionPacket($player, $nearVector);
                 }else{
                     $player->sendMessage($this->config->get('message-no-nearest-player'));
@@ -36,7 +37,21 @@ class NearestPlayerCompass extends PluginBase implements Listener{
             }
         }
     }
-}
+
+    private function sendEachType(Player $player, string $message){
+        switch(strtolower($this->config->get('sending-message-type'))){
+            case 'tip':
+                $player->sendTip($message);
+                break;
+
+            case 'popup':
+                $player->sendPopup($message);
+                break;
+
+            default:
+                $player->sendMessage($message);
+                break;
+        }
     }
 
     private function setSpawnPositionPacket(Player $player, Vector3 $pos) : void{
