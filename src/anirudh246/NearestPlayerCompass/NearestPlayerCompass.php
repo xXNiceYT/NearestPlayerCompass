@@ -11,7 +11,6 @@ use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\SetSpawnPositionPacket;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
-use pocketmine\event\player\PlayerMoveEvent;
 
 class NearestPlayerCompass extends PluginBase implements Listener{
     public function onEnable(){
