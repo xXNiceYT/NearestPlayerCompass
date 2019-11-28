@@ -1,6 +1,7 @@
 <?php
 namespace anirudh246\NearestPlayerCompass;
 
+use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\Player;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemHeldEvent;
@@ -10,6 +11,8 @@ use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\SetSpawnPositionPacket;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use pocketmine\event\player\PlayerMoveEvent;
+
 class NearestPlayerCompass extends PluginBase implements Listener{
     public function onEnable(){
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -62,6 +65,18 @@ class NearestPlayerCompass extends PluginBase implements Listener{
         $pk->z = (int) $pos->getZ();
         $pk->spawnForced = false;
         $player->dataPacket($pk);
+        
+    }
+    public function onPlayerMove(PlayerMoveEvent $ev) {
+        $pk = new SetSpawnPositionPacket();
+        $pk->spawnType = SetSpawnPositionPacket::TYPE_WORLD_SPAWN;
+        $pk->x = (int) $pos->getX();
+        $pk->y = (int) $pos->getY();
+        $pk->z = (int) $pos->getZ();
+        $pk->spawnForced = false;
+        $player->dataPacket($pk);
+
+
     }
 
     private function calculateNearestPlayer(Player $player) : ?Player{
@@ -80,4 +95,5 @@ class NearestPlayerCompass extends PluginBase implements Listener{
         }
         return $closest;
     }
+
 }
