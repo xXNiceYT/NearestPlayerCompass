@@ -1,7 +1,6 @@
 <?php
 namespace anirudh246\NearestPlayerCompass;
 
-use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\Player;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerItemHeldEvent;
@@ -11,6 +10,9 @@ use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\SetSpawnPositionPacket;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use pocketmine\Server;
+use pocketmine\scheduler\Task;
+
 
 class NearestPlayerCompass extends PluginBase implements Listener{
     public function onEnable(){
@@ -64,19 +66,10 @@ class NearestPlayerCompass extends PluginBase implements Listener{
         $pk->z = (int) $pos->getZ();
         $pk->spawnForced = false;
         $player->dataPacket($pk);
-        
+        $time = 0.1;
+        $this->getServer()->getScheduler()->scheduleRepeatingTask($pk, $time);
     }
-    public function onPlayerMove(PlayerMoveEvent $ev) {
-        $pk = new SetSpawnPositionPacket();
-        $pk->spawnType = SetSpawnPositionPacket::TYPE_WORLD_SPAWN;
-        $pk->x = (int) $pos->getX();
-        $pk->y = (int) $pos->getY();
-        $pk->z = (int) $pos->getZ();
-        $pk->spawnForced = false;
-        $player->dataPacket($pk);
 
-
-    }
 
     private function calculateNearestPlayer(Player $player) : ?Player{
         $closest = null;
