@@ -90,10 +90,12 @@ class Main extends PluginBase implements Listener{
                     return $closest;
                 }
 
-            }}}
             }
-        }, 20); //period/interval
-    }
+            }
+        ,
+        20); //period/interval
+
+
 
     }
 
