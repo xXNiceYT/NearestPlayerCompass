@@ -21,11 +21,11 @@ class Main extends PluginBase implements Listener{
         @mkdir($this->getDataFolder(), 0744, true);
         $this->saveResource('config.yml', false);
         $this->config = new Config($this->getDataFolder().'config.yml', Config::YAML);
-        TaskScheduler::scheduleRepeatingTask(\pocketmine\task\Task $task, int $period);
-        $this->getScheduler()->scheduleRepeatingTask(new class extends \pocketmine\scheduler\Task{
+        TaskScheduler::scheduleRepeatingTask(\pocketmine\task\Task $task,int $period);
+        $this->getScheduler()->scheduleRepeatingTask(new class extends \pocketmine\scheduler\Task) {
             public function onRun(int $currentTick) : void{
                 public function onItemHeld(PlayerItemHeldEvent $event){
-                    $player = $event->getPlayer();
+                    $player = $event->getPlayer(); 
                     if($event->getItem()->getId() === ItemIds::COMPASS){
                         $onlyOperator = (bool) $this->config->get('apply-only-permitted-player');
                         if(($onlyOperator && $player->hasPermission('nearestplayercompass.allow.permission')) || $onlyOperator === false){
@@ -98,4 +98,5 @@ class Main extends PluginBase implements Listener{
 
 
     }
+
 
