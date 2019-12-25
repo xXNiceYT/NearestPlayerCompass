@@ -16,7 +16,7 @@ use pocketmine\scheduler\Task;
 use anirudh246\NearestPlayerCompass\Main;
 
 
-class Main extends PluginBase{
+class Main extends PluginBase implements Listener{
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
