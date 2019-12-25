@@ -1,6 +1,6 @@
 name: NearestPlayerCompass
 api: 3.0.0
-main: anirudh246\NearestPlayerCompass\Main
+main: NearestPlayerCompass\Main
 version: 1.0.0
 author: anirudh246
 
