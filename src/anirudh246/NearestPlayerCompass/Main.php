@@ -16,8 +16,7 @@ use pocketmine\scheduler\Task;
 use anirudh246\NearestPlayerCompass\Main
 
 
-class Main extends PluginBase implements Listener
-{
+class Main extends PluginBase{
     public function onEnable()
     {
         $this->getServer()->getPluginManager()->registerEvents($this, $this);
@@ -27,8 +26,8 @@ class Main extends PluginBase implements Listener
         $this->getScheduler()->scheduleRepeatingTask(new CompassTask, 20);
 
 
-        }
     }
+}
 }
 
 
