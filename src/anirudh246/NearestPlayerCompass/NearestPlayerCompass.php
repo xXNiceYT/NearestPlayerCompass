@@ -24,7 +24,7 @@ class Main extends PluginBase implements Listener
         @mkdir($this->getDataFolder(), 0744, true);
         $this->saveResource('config.yml', false);
         $this->config = new Config($this->getDataFolder() . 'config.yml', Config::YAML);
-        TaskScheduler::scheduleRepeatingTask(\pocketmine\task\Task int $period);
+        TaskScheduler::scheduleRepeatingTask(\pocketmine\task\Task int);
         $this->getScheduler()->scheduleRepeatingTask(new CompassTask($this), (int) $this->getConfig()->get("update-interval") * 20);
 
 
