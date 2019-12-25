@@ -13,7 +13,7 @@ use pocketmine\scheduler\TaskScheduler;
 use pocketmine\utils\Config;
 use pocketmine\Server;
 use pocketmine\scheduler\Task;
-use anirudh246\NearestPlayerCompass\NearestPlayerCompass;
+use anirudh246\NearestPlayerCompass\Main
 
 
 class Main extends PluginBase implements Listener
@@ -24,12 +24,12 @@ class Main extends PluginBase implements Listener
         @mkdir($this->getDataFolder(), 0744, true);
         $this->saveResource('config.yml', false);
         $this->config = new Config($this->getDataFolder() . 'config.yml', Config::YAML);
-        $this->getScheduler()->scheduleRepeatingTask(new CompassTask($this), (int) $this->getConfig()->get("update-interval") * 20);
+        TaskScheduler::scheduleRepeatingTask(\pocketmine\task\Task $task,int $period)}
+        $this->getScheduler()->scheduleRepeatingTask(new CompassTask($this), (int)$this->getConfig()->get("update-interval") * 20);
 
 
         }
     }
-
-
+}
 
 
