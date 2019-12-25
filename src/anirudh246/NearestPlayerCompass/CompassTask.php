@@ -18,7 +18,7 @@ use anirudh246\NearestPlayerCompass\Main;
 
 class CompassTask extends Task implements Listener {
     public function onRun(int $currentTick) : void{
-        public function onItemHeld(PlayerItemHeldEvent $event){
+        function onItemHeld(PlayerItemHeldEvent $event){
             $player = $event->getPlayer();
             if($event->getItem()->getId() === ItemIds::COMPASS){
                 $onlyOperator = (bool) $this->config->get('apply-only-permitted-player');
