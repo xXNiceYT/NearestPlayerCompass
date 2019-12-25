@@ -87,7 +87,7 @@ class CompassTask extends Task implements Listener {
     }
 }
         
-        20); //period/interval
+        20; //period/interval
 
 
 
