@@ -14,7 +14,7 @@ use pocketmine\scheduler\TaskScheduler;
 use pocketmine\utils\Config;
 use pocketmine\Server;
 use pocketmine\scheduler\Task;
-use anirudh246\NearestPlayerCompass\Main
+use anirudh246\NearestPlayerCompass\Main;
 
 class CompassTask extends Task implements Listener {
     public function onRun(int $currentTick) : void{
