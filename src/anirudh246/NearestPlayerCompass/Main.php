@@ -13,7 +13,7 @@ use pocketmine\scheduler\TaskScheduler;
 use pocketmine\utils\Config;
 use pocketmine\Server;
 use pocketmine\scheduler\Task;
-use anirudh246\NearestPlayerCompass\Main
+use anirudh246\NearestPlayerCompass\Main;
 
 
 class Main extends PluginBase{
