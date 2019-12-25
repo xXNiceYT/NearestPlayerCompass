@@ -54,7 +54,7 @@ class CompassTask extends Task implements Listener {
             }
         }
 
-        private function setSpawnPositionPacket(Player $player, Vector3 $pos) : void{
+        function setSpawnPositionPacket(Player $player, Vector3 $pos) : void{
             $pk = new SetSpawnPositionPacket();
             $pk->spawnType = SetSpawnPositionPacket::TYPE_WORLD_SPAWN;
             $pk->x = (int) $pos->getX();
@@ -67,7 +67,7 @@ class CompassTask extends Task implements Listener {
         }
 
 
-        private function calculateNearestPlayer(Player $player) : ?Player{
+        function calculateNearestPlayer(Player $player) : ?Player{
             $closest = null;
             if($player instanceof Position){
                 $lastSquare = -1;
