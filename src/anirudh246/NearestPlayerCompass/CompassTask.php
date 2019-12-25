@@ -38,7 +38,7 @@ class CompassTask extends Task implements Listener {
             }
         }
 
-        private function sendEachType(Player $player, string $message){
+        function sendEachType(Player $player, string $message){
             switch(strtolower($this->config->get('sending-message-type'))){
                 case 'tip':
                     $player->sendTip($message);
