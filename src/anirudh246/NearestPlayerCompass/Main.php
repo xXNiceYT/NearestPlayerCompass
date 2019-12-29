@@ -38,7 +38,7 @@ class Main extends PluginBase implements Listener{
     public function onItemHeld(PlayerItemHeldEvent $event){
         $player = $event->getPlayer();
         if($event->getItem()->getId() === ItemIds::COMPASS){
-            $onlyOperator = (bool) $this->config->get('apply-only-permitted-player');
+            $onlyOperator = (bool) $this->getConfig()->get('apply-only-permitted-player');
             if(($onlyOperator && $player->hasPermission('nearestplayercompass.allow.permission')) || $onlyOperator === false){
                 $this->sendCalculatedMessage($player);
             }
@@ -46,7 +46,7 @@ class Main extends PluginBase implements Listener{
     }
  
     public function sendEachType(Player $player, string $message): void{
-        switch(strtolower($this->config->get('sending-message-type'))){
+        switch(strtolower($this->getConfig()->get('sending-message-type'))){
             case 'tip':
                 $player->sendTip($message);
                 break;
@@ -88,7 +88,7 @@ class Main extends PluginBase implements Listener{
     
     public function sendCalculatedMessage(Player $player): void{
         $nearPlayer = $this->calculateNearestPlayer($player);
-        $setNeedle = (bool) $this->config->get('set-needle-to-nearest');
+        $setNeedle = (bool) $this->getConfig()->get('set-needle-to-nearest');
         if($nearPlayer instanceof Player){
             $myVector = $player->asVector3();
             $nearVector = $nearPlayer->asVector3();
@@ -96,7 +96,7 @@ class Main extends PluginBase implements Listener{
             $this->sendEachType($player, $message);
             if($setNeedle) $this->setSpawnPositionPacket($player, $nearVector);
         }else{
-            $player->sendMessage($this->config->get('message-no-nearest-player'));
+            $player->sendMessage($this->getConfig()->get('message-no-nearest-player'));
         }
     }
 }
